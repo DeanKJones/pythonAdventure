@@ -2,6 +2,7 @@ import math
 from sprite import Sprite
 
 class SpriteControlled(Sprite):
+
     def __init__(self, x, y, filename, centered, speed):
         Sprite.__init__(self, x, y, filename, True)
         self.speed = speed
@@ -13,6 +14,7 @@ class SpriteControlled(Sprite):
         self.is_moving = True
 
     def update(self):
+        
         if(self.is_moving):
 
             if(self.x < self.goal_x):

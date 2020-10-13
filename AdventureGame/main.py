@@ -1,55 +1,46 @@
-import pygame, sys, math, time
+import pygame, math
 from sprite import Sprite
 from sprite_controlled import SpriteControlled
 from scene import Scene
-from warp import Warp
-from level00 import Warp
+from level00 import Level00
+from level01 import Level01
 
 def main():
 
-    #load 
-
+    # Load
     pygame.init()
     screen = pygame.display.set_mode((800, 600))
     pygame.mouse.set_visible(False)
+    quit_game = False
 
     level00 = Level00("Background.png", "Ground.png")
     level01 = Level01("Background.png", "Ground_01.png")
-
     scenes = {}
     scenes["level00"] = level00
     scenes["level01"] = level01
-
     current_scene = level00
 
-    def change_scene(name):
+    def change_scene(name, x):
         nonlocal current_scene
         current_scene = scenes[name]
         current_scene.hero.x = x
-        current_scene.player.is_moving = False
+        current_scene.hero.is_moving = False
 
-    quit = False
-
-    while not(quit):
-
-        #inputs
-
+    while not quit_game:
+        # Inputs
         events = pygame.event.get()
         for event in events:
             if event.type == pygame.QUIT:
-                sys.exit()
-
+                quit_game = True
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
-                    quit = True
+                    quit_game = True
         current_scene.inputs(events)
 
-        # update
-
+        # Update
         current_scene.update(change_scene)
-
+        
         # Draw
-
         screen.fill((0, 0, 0))
         current_scene.draw(screen)
         pygame.display.update()
