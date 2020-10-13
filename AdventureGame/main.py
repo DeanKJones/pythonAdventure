@@ -1,74 +1,53 @@
-import pygame, sys, math
+import pygame, sys, math, time
 from sprite import Sprite
+from sprite_controlled import SpriteControlled
+from scene import Scene
 
 def main():
 
     #load 
+
     pygame.init()
     screen = pygame.display.set_mode((800, 600))
-    font = pygame.font.Font(None, 24)
+    pygame.mouse.set_visible(False)
+
+    level00 = Level00("Background.png", "Ground.png")
+    level01 = Level01("Background.png", "Ground_01.png")
+
+    scenes = {}
+    scenes["level00"] = level00
+    scenes["level01"] = level01
+
+    current_scene = level00
+
+    def change_scene(name):
+        nonlocal current_scene
+        current_scene = scenes[name]
+
     quit = False
-    path = 'D:\JONES_Dean\Exercises\AdventureGame\\'
-    background = pygame.image.load(path+'Background.png').convert()
-    hero = Sprite(200, 500, "Hero.png", True)
-    cursor = Sprite(0, 0, "Cursor.png", False)
-    ground = Sprite(400, 600, "Ground.png", True)
-    friend = Sprite(500, 500, "Friend.png", True)
-
-    spr_is_moving = False
-    spr_speed = 2
-    goal_x = 0
-    spr_x, spr_y = 100, 500
-
-    collision_text = font.render("Oops, sorry!", False,(0, 0, 0))
 
     while not(quit):
+
         #inputs
-        for event in pygame.event.get():
+
+        events = pygame.event.get()
+        for event in events:
             if event.type == pygame.QUIT:
                 sys.exit()
 
             if event.type == pygame.KEYDOWN:
-                if event.key == pygame.KEYDOWN:
+                if event.key == pygame.K_ESCAPE:
                     quit = True
-
-            if event.type == pygame.MOUSEBUTTONDOWN:
-                mouse_click = pygame.mouse.get_pos()
-                goal_x = mouse_click[0]
-                spr_is_moving = True
-                #print(mouse_click[0])
-
+        current_scene.inputs(events)
 
         # update
 
-        cursor_pos = pygame.mouse.get_pos()
-        cursor.set_position(cursor_pos)
-        if(spr_is_moving):
-            goal_x = mouse_click[0]
-            
-            if(spr_x < goal_x):
-                spr_x = spr_x + spr_speed
-            if(spr_x > goal_x):
-                spr_x = spr_x - spr_speed
-            if(math.fabs(goal_x - spr_x) < spr_speed):
-                spr_is_moving = False
-
-            spr_pos = spr_x, spr_y
-
-            hero.set_position(spr_pos)
-            #print("click")
-
+        current_scene.update(change_scene)
 
         # Draw
+
         screen.fill((0, 0, 0))
-        screen.blit(background, (0, 0))
-        ground.draw(screen)
-        hero.draw(screen)
-        friend.draw(screen)
-        if(hero.intersects(friend)):
-            screen.blit(collision_text, (hero.x, hero.y - 100))
-            #print(hero.x, hero.y)
-        cursor.draw(screen)
+        current_scene.draw(screen)
         pygame.display.update()
 
 if __name__ == "__main__":
