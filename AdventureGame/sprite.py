@@ -2,7 +2,7 @@ import pygame
 
 class Sprite:
 
-    path = 'D:\JONES_Dean\Exercises\AdventureGame\\'
+    path = 'D:\ArtFX\pythonAdventure\AdventureGame\\'
     
     def __init__(self, x, y, filename, centered):
         self.x = x

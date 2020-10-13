@@ -2,6 +2,8 @@ import pygame, sys, math, time
 from sprite import Sprite
 from sprite_controlled import SpriteControlled
 from scene import Scene
+from warp import Warp
+from level00 import Warp
 
 def main():
 
@@ -23,6 +25,8 @@ def main():
     def change_scene(name):
         nonlocal current_scene
         current_scene = scenes[name]
+        current_scene.hero.x = x
+        current_scene.player.is_moving = False
 
     quit = False
 
