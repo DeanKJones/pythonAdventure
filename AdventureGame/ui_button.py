@@ -2,30 +2,34 @@ import pygame
 from ui_element import UiElement
 
 class UiButton(UiElement):
-    def __init__(self, x, y, w, h):
+    def __init__(self, x, y, w, h, filename):
         UiElement.__init__(self, x, y, w, h)
-        self.color = (0, 0, 255)
+        #self.color = (0, 0, 255)
         UiElement.set_event(self, "hover_in", self.on_hover_in)
         UiElement.set_event(self, "hover_out", self.on_hover_out)
         UiElement.set_event(self, "click", self.on_click)
         UiElement.set_event(self, "release", self.on_release)
         self.is_hover = False
         self.is_clicked = False
+        self.sprite_idle = Sprite(x, y, filename + '_idle.png', False)
+        self.sprite_hover = Sprite(x, y, filename + '_hover.png', False)
+        self.sprite_click = Sprite(x, y, filename + '_click.png', False)
+        self.current_sprite = self.sprite_idle
 
     def on_hover_in(self):
-        self.change_color((175, 175, 175))
+        self.current_sprite = self.sprite_hover
 
     def on_hover_out(self):
-        self.change_color((0, 0, 175))
+        self.current_sprite = self.sprite_idle
 
     def on_click(self):
-        self.change_color((255, 255, 0))
+        self.current_sprite = self.sprite_click
 
     def on_release(self):
         if(self.is_hover):
-            self.change_color((175, 175, 175))
+            self.current_sprite = self.sprite_hover
         else:
-            self.change_color((0, 0, 225))
+            self.current_sprite = self.sprite_idle
 
     def change_color(self, color):
         self.color = color
