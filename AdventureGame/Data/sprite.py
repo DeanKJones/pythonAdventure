@@ -2,29 +2,28 @@ import pygame
 
 class Sprite:
 
-<<<<<<< HEAD:AdventureGame/Data/sprite.py
     path = 'D:\JONES_Dean\pythonAdventure\AdventureGame\Images\\'
-=======
-    path = 'D:\ArtFX\pythonAdventure\AdventureGame\\'
->>>>>>> 2c6cdb95edb01eec63fd486b9b0e72c2318405e1:AdventureGame/sprite.py
     
     def __init__(self, x, y, filename, centered):
         self.x = x
         self.y = y 
         self.surface = pygame.image.load(Sprite.path + filename).convert_alpha()
-        self.ox = 0
-        self.oy = 0
+        self.centered = centered
+        self.width = self.surface.get_width()
+        self.height = self.surface.get_height()
+        #self.ox = 0
+        #self.oy = 0
         if(centered):
-            self.ox= -self.surface.get_width()/2
-            self.oy = -self.surface.get_height()
+            self.ox= -self.width / 2
+            self.oy = -self.height
 
     def set_position(self, position):
         self.x = position[0]
         self.y = position[1]
 
     def intersects(self, sprite):
-        x1, y1, w1, h1 = self.x + self.ox, self.y + self.oy, self.surface.get_width(), self.surface.get_height()
-        x2, y2, w2, h2 = sprite.x + sprite.ox, sprite.y + sprite.oy, sprite.surface.get_width(), sprite.surface.get_height()
+        x1, y1, w1, h1 = self.x + self.ox, self.y + self.oy, self.width, self.height
+        x2, y2, w2, h2 = sprite.x + sprite.ox, sprite.y + sprite.oy, sprite.width, sprite.height
         return not(x1 + w1 < x2 or x2 + w2 < x1 or y1 + h1 < y2 or y2 + h2 < y1)
 
     def draw(self, screen):
