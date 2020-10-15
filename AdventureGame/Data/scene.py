@@ -1,4 +1,4 @@
-import pygame
+import pygame, sys
 from sprite_controlled import SpriteControlled
 from sprite import Sprite
 from warp import Warp
@@ -11,6 +11,7 @@ from sprite_animated import SpriteAnimated
 class Scene:
     
     path = 'D:\\JONES_Dean\\pythonAdventure\\AdventureGame\\Images\\'
+    path = 'D:\\JONES_Dean\\pythonAdventure\\AdventureGame\\Data\\'
 
     def __init__(self, filename):
         self.filename = filename
@@ -33,6 +34,9 @@ class Scene:
         button = UiButton(10, 10, 80, 80, filename)
         self.ui_top.add_element(panel)
         self.ui_top.add_element(button)
+
+        font = 12
+        collision_text = font.render("Oops, my bad!", False, (0, 0, 0))
 
         for line in data:
             cell = line.split(";")
@@ -117,6 +121,11 @@ class Scene:
             w.draw(screen)
         for s in self.sprites:
             s.draw(screen)
+
+            if(self.hero.intersects(s)):
+                screen.blit(collision_text, (self.hero.x, self.hero.y - 100))
+                #print("Collision")
+
         self.hero.draw(screen)
         
         #self.panel.draw(screen)
