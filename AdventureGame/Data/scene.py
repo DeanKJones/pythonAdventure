@@ -35,7 +35,6 @@ class Scene:
         self.ui_top.add_element(panel)
         self.ui_top.add_element(button)
 
-        font = 12
         collision_text = font.render("Oops, my bad!", False, (0, 0, 0))
 
         for line in data:
