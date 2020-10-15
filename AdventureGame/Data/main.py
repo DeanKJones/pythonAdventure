@@ -2,8 +2,6 @@ import pygame, math
 from sprite import Sprite
 from sprite_controlled import SpriteControlled
 from scene import Scene
-#from level00 import Level00
-#from level01 import Level01
 
 def main():
 

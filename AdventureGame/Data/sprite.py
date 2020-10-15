@@ -2,7 +2,7 @@ import pygame
 
 class Sprite:
 
-    path = 'D:\JONES_Dean\pythonAdventure\AdventureGame\Images\\'
+    path = 'D:\\JONES_Dean\\pythonAdventure\\AdventureGame\\Images\\'
     
     def __init__(self, x, y, filename, centered):
         self.x = x
@@ -11,8 +11,8 @@ class Sprite:
         self.centered = centered
         self.width = self.surface.get_width()
         self.height = self.surface.get_height()
-        #self.ox = 0
-        #self.oy = 0
+        self.ox = 0
+        self.oy = 0
         if(centered):
             self.ox= -self.width / 2
             self.oy = -self.height

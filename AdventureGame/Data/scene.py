@@ -6,10 +6,11 @@ from ui_panel import UiPanel
 from ui_group import UiGroup
 #from ui_element import UiElement
 from ui_button import UiButton
+from sprite_animated import SpriteAnimated
 
 class Scene:
     
-    path = 'D:\JONES_Dean\pythonAdventure\AdventureGame\Images\\'
+    path = 'D:\\JONES_Dean\\pythonAdventure\\AdventureGame\\Images\\'
 
     def __init__(self, filename):
         self.filename = filename

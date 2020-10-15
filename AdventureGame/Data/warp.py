@@ -1,5 +1,6 @@
 import pygame
 from sprite import Sprite
+from sprite_animated import SpriteAnimated
 
 class Warp(Sprite):
     def __init__(self, x, y, filename, centered, to_scene):
