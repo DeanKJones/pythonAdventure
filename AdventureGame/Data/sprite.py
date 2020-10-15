@@ -2,7 +2,11 @@ import pygame
 
 class Sprite:
 
+<<<<<<< HEAD:AdventureGame/Data/sprite.py
     path = 'D:\JONES_Dean\pythonAdventure\AdventureGame\Images\\'
+=======
+    path = 'D:\ArtFX\pythonAdventure\AdventureGame\\'
+>>>>>>> 2c6cdb95edb01eec63fd486b9b0e72c2318405e1:AdventureGame/sprite.py
     
     def __init__(self, x, y, filename, centered):
         self.x = x
