@@ -24,7 +24,7 @@ def main():
     def change_scene(name):
         nonlocal current_scene
         current_scene = scenes[name]
-        current_scene.player.x = x
+        #current_scene.player.x = x
         current_scene.hero.is_moving = False
 
     while not quit_game:

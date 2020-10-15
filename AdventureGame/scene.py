@@ -19,7 +19,8 @@ class Scene:
         file = open(Scene.path + filename)
         data = file.read().splitlines()
 
-        self.panel = UiPanel(0, 0, 800, 100)
+        #self.panel = UiPanel(0, 0, 800, 100)
+        #self.button = UiButton(10, 10, 80, 80)
 
         ground_height = 0
         self.cursor = Sprite(0, 0, 'cursor.png', False)
@@ -105,7 +106,7 @@ class Scene:
             if(self.hero.intersects(w)):
                 change_scene(w.to_scene)
 
-        self.panel.update()
+        #self.panel.update()
         self.ui_top.update()
 
     def draw(self, screen):
@@ -118,5 +119,6 @@ class Scene:
         self.hero.draw(screen)
         
         #self.panel.draw(screen)
+        self.ui_top.draw(screen)
         self.cursor.draw(screen)
     
